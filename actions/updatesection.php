@@ -43,6 +43,12 @@ if(isset($_SESSION['login']) && $_SESSION['level'] == 'Administrateur') {
 
         // JE NE FAIS PAS LA BOUCLE POUR L'UNLINK DE L'IMAGE (QUI EFFACE QU'EN ON NE MET RIEN OU LA MEME) COMME ON A PAS OBTENUE TA VERSION CORRIGEE...
 
+        // CORRECTIF PROF PATRICK MARTHUS
+        if ($_FILES['image']['name'] != $_POST['actually'])
+        {
+            unlink('../images/sections/' . $_POST['sectionsimageoriginel']);
+        }
+
         header('location: ../admin.php');
     }
 } else {

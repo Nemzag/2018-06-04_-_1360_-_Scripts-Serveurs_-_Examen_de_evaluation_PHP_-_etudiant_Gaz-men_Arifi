@@ -56,6 +56,8 @@ if($result->rowCount()) {
         $_SESSION['level'] = 'Visiteur';
          header('location: ../index.php');
     }
+
+        // REDIRECTION MAUVAIS PASSWORD
     else
     {
         header('location: ../login.html');

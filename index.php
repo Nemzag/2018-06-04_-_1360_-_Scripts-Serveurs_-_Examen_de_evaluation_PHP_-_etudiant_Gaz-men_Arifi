@@ -15,11 +15,13 @@ $dbh = db();
 
 $_GET['cat'] = $_GET['cat'] ?? null;
 
+// REQUETE CATEGORIE
 try {
-    $sql = "SELECT categories.name AS categoriesName,
-                   categories.image AS categoriesImage
+    $sql = "SELECT eval2018.categories.name AS categoriesName,
+                   eval2018.categories.image AS categoriesImage
               FROM eval2018.categories
-          GROUP BY categoriesName";
+          GROUP BY categoriesName
+          ORDER BY categoriesName";
 } catch (PDOException $e) {
     die('Error SQL : '.$e->getMessage());
 }
@@ -34,54 +36,59 @@ $result->execute();
     <a href="?cat=<?= $row->categoriesName ?>"><img src="images/categories/<?= $row->categoriesImage ?>" alt="<?= $row->categoriesName ?>" title="<?= $row->categoriesName ?>"></a>
 <?php endwhile; ?>
 
+<!-- REQUETE SECTION -->
 <?php
 try {
-    $sql = "SELECT sections.id,
-                   sections.name AS sectionsName,
-                   sections.categoryId,
-                   sections.view,
-                   sections.duration,
-                   sections.image AS sectionsImage,
-                   sections.description,
-                   categories.name AS categoriesName,
-                   categories.image AS categoriesImage
+    $sql = "SELECT eval2018.sections.id,
+                   eval2018.sections.name AS sectionsName,
+                   eval2018.sections.categoryId,
+                   eval2018.sections.view,
+                   eval2018.sections.duration,
+                   eval2018.sections.image AS sectionsImage,
+                   eval2018.sections.description,
+                   eval2018.categories.name AS categoriesName,
+                   eval2018.categories.image AS categoriesImage
               FROM eval2018.categories
          LEFT JOIN eval2018.sections
-                ON categories.id = categoryId
-             WHERE categories.name = :catName AND sections.view = 1";
+                ON eval2018.categories.id = categoryId
+             WHERE eval2018.categories.name = :catName AND eval2018.sections.view = 1";
+    // ALT+ENTER POUR LANCER LA REQUETE ET LA TESTER.
 } catch (PDOException $e) {
     die('Error SQL : '.$e->getMessage());
 }
 
+// REQUETE SECURISE
 $result = $dbh->prepare($sql);
 $result->bindValue('catName', $_GET['cat'], PDO::PARAM_STR);
 $result->execute();
 
-$row = $result->fetch(PDO::FETCH_OBJ);
+$row = $result->fetch(PDO::FETCH_OBJ); // Le cursor passe à 1
+$result->execute(); // Solution, du bug du manquement du premier résultat dans le listing while, j'execute, et je repasse le curseur à 0.
 
 echo '<br><br>';
-
 if(!empty($result) && isset($_GET['cat'])) : ?>
-<!-- RECUPERER LE NOM DE LA CATEGORIE -->
-<h1><?= !empty($row->categoriesName) ? $row->categoriesName : 'Catégories vide' ?></h1>
-<?php if(!empty($row->categoriesName)) : ?>
-<table class="table">
-    <tr>
-        <th>Image</th>
-        <th>Nom</th>
-        <th>Durée</th>
-        <th>Description</th>
-    </tr>
-<?php while($row = $result->fetch(PDO::FETCH_OBJ)) : ?>
-    <tr>
-        <td><img src="images/sections/<?= $row->sectionsImage ?>" alt="<?= $row->sectionsImage ?>" title="<?= $row->sectionsImage ?>"></td>
-        <td><strong><?= $row->sectionsName ?></strong></td>
-        <td style="white-space: nowrap"><?= $row->duration ?></td>
-        <td><?= cutString($row->description) ?></td>
-    </tr>
-<?php endwhile; ?>
-</table>
-<?php endif; ?>
+    <!-- Pour eviter l'affichage quand les sections sont vide. -->
+
+    <!-- RECUPERER LE NOM DE LA CATEGORIE -->
+    <h3><?= !empty($row->categoriesName) ? $row->categoriesName : 'Catégories vide' ?></h3>
+    <?php if(!empty($row->categoriesName)) : ?>
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Nom</th>
+            <th>Durée</th>
+            <th>Description</th>
+        </tr>
+    <?php while($row = $result->fetch(PDO::FETCH_OBJ)) : ?> <!-- Le curseur passe à 1 -->
+        <tr>
+            <td><img src="images/sections/<?= $row->sectionsImage ?>" alt="<?= $row->sectionsImage ?>" title="<?= $row->sectionsImage ?>"></td>
+            <td><strong><?= $row->sectionsName ?></strong></td>
+            <td style="white-space: nowrap"><?= $row->duration ?></td>
+            <td><?= cutString($row->description) ?></td>
+        </tr>
+    <?php endwhile; ?>
+    </table>
+    <?php endif; ?>
 <?php endif; ?>
 <?php
 require_once 'inc/footer.inc.php';
