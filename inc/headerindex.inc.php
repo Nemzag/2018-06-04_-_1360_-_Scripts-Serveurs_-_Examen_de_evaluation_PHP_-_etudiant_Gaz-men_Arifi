@@ -16,9 +16,9 @@ session_start();
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">IEPSCF-NAMUR</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
+	</button>
+	<a class="navbar-brand" href="#">IEPSCF-NAMUR</a>
+	<div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
            <li class="nav-item">
                 <a class="nav-link" href="index.php">Home</a>
@@ -27,15 +27,29 @@ session_start();
     </div>
 
     <?php if(isset($_SESSION['login'])) : ?>
+
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <div class="form-inline my-2 my-lg">
-            <a class="btn btn-primary" href="admin.php" role="button">Administration
-            </a>&nbsp;&nbsp;
-            <a class="btn btn-danger" href="actions/out.php" role="button">Logout
-            </a>
+
+        <div class="form-inline my-2 my-lg-0 ml-auto">
+
+            <a class="btn btn-primary" href="admin.php" role="button">Administration</a>&nbsp;&nbsp;
+            <a class="btn btn-danger" href="actions/out.php" role="button">Log‑out</a>
+
         </div>
     </div>
+
+	<?php else: ?>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+		<div class="form-inline my-2 my-lg-0 ml-auto"> <!-- my  margin top bottom ; ml = margin left -->
+			<a class="btn btn-primary" href="login.html" role="button">Log‑in</a>
+		</div>
+
+	</div>
+
     <?php endif; ?>
+
 </nav>
 <div class="container">
     <div class="row">

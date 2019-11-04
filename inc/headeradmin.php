@@ -22,7 +22,7 @@ if(isset($_SESSION['login']) && $_SESSION['level'] == 'Administrateur') : ?>
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">IDENTIFIANT ICI</a>
+    <a class="navbar-brand" href="#"><?= mb_strtoupper($_SESSION['login']) ?></a> <!-- IDENTIFIANT ICI -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -36,11 +36,12 @@ if(isset($_SESSION['login']) && $_SESSION['level'] == 'Administrateur') : ?>
                 <a class="nav-link" href="">Users</a>
             </li>
         </ul>
+
         <div class="form-inline my-2 my-lg-0">
-            <a class="btn btn-primary" href="index.php" role="button">Website
-            </a>&nbsp;&nbsp;
-            <a class="btn btn-danger" href="actions/out.php" role="button">Logout
-            </a>
+
+            <a class="btn btn-primary" href="index.php" role="button">Website</a>&nbsp;&nbsp;
+            <a class="btn btn-danger" href="actions/out.php" role="button">Log‑out</a>
+
         </div>
     </div>
 </nav>
