@@ -1,0 +1,10 @@
+h2, h3 {
+    padding: 2rem 0;
+}
+
+img {
+    width: 200px;
+}
+td img {
+    width: 100px;
+}
