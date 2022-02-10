@@ -1,7 +1,7 @@
 ## Evaluation Scripts Serveur
 ### Consignes
 1. Réalisez une page publique (index.php) et une page administration sécurisée (admin.php) dans le cadre d'un établissement scolaire (IEPSCF)
-2. La base de données (eval2018) est fournie ainsi que l'arborescence du projet (dossiers et fichiers).  Tous les fichiers que vous devez utiliser existent déjà avec un commentaire pour l'écriture du script.  Vous ne devez rien déplacer ou renommer.  Interdiction d’utiliser des sources externes ou des anciens exercices pour l’écriture des scripts.
+2. La base de données (2018_06_07_evaluation) est fournie ainsi que l'arborescence du projet (dossiers et fichiers).  Tous les fichiers que vous devez utiliser existent déjà avec un commentaire pour l'écriture du script.  Vous ne devez rien déplacer ou renommer.  Interdiction d’utiliser des sources externes ou des anciens exercices pour l’écriture des scripts.
 3. Pour la mise en forme, les fichiers CSS et JS sont fournis ainsi que le nom des classes utilisées.  Les contenus HTML non dynamique sont également disponibles sur les fichiers.
 ### Etapes
 1. Création de la connexion dans le fichier db.php

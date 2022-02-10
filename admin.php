@@ -18,7 +18,7 @@ $sql = "SELECT sections.image,
                sections.id,
                sections.duration,
                sections.view
-        FROM eval2018.sections
+        FROM 2018_06_07_evaluation.sections
         LEFT JOIN categories on sections.categoryId = categories.id
         ORDER BY sections.name";
 

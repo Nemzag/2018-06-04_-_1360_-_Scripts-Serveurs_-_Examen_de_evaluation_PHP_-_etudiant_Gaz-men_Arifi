@@ -17,9 +17,9 @@ $_GET['cat'] = $_GET['cat'] ?? null;
 
 // REQUETE CATEGORIE
 try {
-    $sql = "SELECT eval2018.categories.name AS categoriesName,
-                   eval2018.categories.image AS categoriesImage
-              FROM eval2018.categories
+    $sql = "SELECT 2018_06_07_evaluation.categories.name AS categoriesName,
+                   2018_06_07_evaluation.categories.image AS categoriesImage
+              FROM 2018_06_07_evaluation.categories
           GROUP BY categoriesName
           ORDER BY categoriesName";
 } catch (PDOException $e) {
@@ -39,19 +39,19 @@ $result->execute();
 <!-- REQUETE SECTION -->
 <?php
 try {
-    $sql = "SELECT eval2018.sections.id,
-                   eval2018.sections.name AS sectionsName,
-                   eval2018.sections.categoryId,
-                   eval2018.sections.view,
-                   eval2018.sections.duration,
-                   eval2018.sections.image AS sectionsImage,
-                   eval2018.sections.description,
-                   eval2018.categories.name AS categoriesName,
-                   eval2018.categories.image AS categoriesImage
-              FROM eval2018.categories
-         LEFT JOIN eval2018.sections
-                ON eval2018.categories.id = categoryId
-             WHERE eval2018.categories.name = :catName AND eval2018.sections.view = 1";
+    $sql = "SELECT 2018_06_07_evaluation.sections.id,
+                   2018_06_07_evaluation.sections.name AS sectionsName,
+                   2018_06_07_evaluation.sections.categoryId,
+                   2018_06_07_evaluation.sections.view,
+                   2018_06_07_evaluation.sections.duration,
+                   2018_06_07_evaluation.sections.image AS sectionsImage,
+                   2018_06_07_evaluation.sections.description,
+                   2018_06_07_evaluation.categories.name AS categoriesName,
+                   2018_06_07_evaluation.categories.image AS categoriesImage
+              FROM 2018_06_07_evaluation.categories
+         LEFT JOIN 2018_06_07_evaluation.sections
+                ON 2018_06_07_evaluation.categories.id = categoryId
+             WHERE 2018_06_07_evaluation.categories.name = :catName AND 2018_06_07_evaluation.sections.view = 1";
     // ALT+ENTER POUR LANCER LA REQUETE ET LA TESTER.
 } catch (PDOException $e) {
     die('Error SQL : '.$e->getMessage());
